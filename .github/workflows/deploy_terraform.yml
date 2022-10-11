@@ -1,0 +1,35 @@
+name: Terraform deployment for VPC
+
+#event, if more then as list []
+on: push
+
+#define the jobs, if more then one- run in parallel by default
+jobs:
+  #give a job id, as a string
+  terraform-deployment:
+    #each job needs the type of machine to run on
+    runs-on: ubuntu-latest
+    #each job is made out of steps- they run commands, setup tasks, etc...
+    #steps are as list of objects
+    steps:
+      #export AWS credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        #aws access_key and aws_secret_access_key
+          with: 
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: "eu-central-one"
+      #clone and checkup the repo with the code
+      - name: clone/checkout the repo code
+        uses: actions/checkout@v2
+      #setup terraform
+      - name: Terraform setup
+        uses: hashicorp/setup-terraform@v2
+      #Terraform init, run command
+      - name: Terraform init
+        run: terraform init
+      #Terraform plan, run command
+      - name: Terraform plan
+        run: terraform run
+      #Terraform apply

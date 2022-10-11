@@ -12,7 +12,7 @@ jobs:
     #each job is made out of steps- they run commands, setup tasks, etc...
     #steps are as list of objects
     steps:
-      #export AWS credentials
+      # export AWS credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         #aws access_key and aws_secret_access_key

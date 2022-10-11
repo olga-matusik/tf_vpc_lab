@@ -29,5 +29,5 @@ jobs:
         run: terraform init
       #Terraform plan, run command
       - name: Terraform plan
-        run: terraform run
+        run: terraform plan
     

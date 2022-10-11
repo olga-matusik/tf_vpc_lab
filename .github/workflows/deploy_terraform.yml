@@ -30,4 +30,4 @@ jobs:
       #Terraform plan, run command
       - name: Terraform plan
         run: terraform run
-      #Terraform apply
+    
